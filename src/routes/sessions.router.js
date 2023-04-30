@@ -88,4 +88,19 @@ router.post("/logout", async (req, res) => {
 	}
 });
 
+router.get(
+	"/github",
+	passport.authenticate("githublogin", { scope: ["user:email"] }),
+	async (req, res) => {}
+);
+
+router.get(
+	"/githubcallback",
+	passport.authenticate("githublogin", { failureRedirect: "/login" }),
+	async (req, res) => {
+		req.session.user = req.user;
+		res.redirect("/");
+	}
+);
+
 export default router;

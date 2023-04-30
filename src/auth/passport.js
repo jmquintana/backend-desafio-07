@@ -4,6 +4,10 @@ import userModel from "../models/users.model.js";
 import { cartsModel } from "../models/carts.model.js";
 import CartsManager from "../controllers/carts.js";
 import { createHash, isValidPassword } from "../utils.js";
+import GitHubStrategy from "passport-github2";
+import config from "../config.js";
+
+const { CLIENT_ID, CLIENT_SECRET, CALLBACK_URL } = config;
 
 const cartsManager = new CartsManager();
 const LocalStrategy = local.Strategy;
@@ -35,7 +39,7 @@ const initializePassport = () => {
 						email,
 						age,
 						role,
-						cartId,
+						cart,
 						password: createHash(password),
 					};
 
@@ -76,6 +80,40 @@ const initializePassport = () => {
 		let user = await userModel.findById(id);
 		done(null, user);
 	});
+
+	passport.use(
+		"githublogin",
+		new GitHubStrategy(
+			{
+				clientID: CLIENT_ID,
+				clientSecret: CLIENT_SECRET,
+				callbackURL: CALLBACK_URL,
+			},
+			async (accessToken, refreshToken, profile, done) => {
+				try {
+					const user = await userModel.findOne({
+						email: profile._json.email,
+					});
+					if (!user) {
+						const newUser = {
+							first_name: profile._json.name,
+							last_name: "",
+							email: profile._json.email,
+							age: 18,
+							role: "user",
+							cart: await cartsManager.addCart({ products: [] }),
+							password: "",
+						};
+						const result = await userModel.create(newUser);
+						return done(null, result);
+					}
+					return done(null, user);
+				} catch (error) {
+					return done(error);
+				}
+			}
+		)
+	);
 };
 
 export default initializePassport;

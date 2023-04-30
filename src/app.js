@@ -19,7 +19,7 @@ import bodyParser from "body-parser";
 // Initialization
 const { DB_USER, DB_PASS, DB_NAME, DB_URL, SESSION_SECRET } = config;
 const app = express();
-const PORT = 8080;
+const PORT = 3000;
 
 // Settings
 app.engine("handlebars", handlebars.engine());

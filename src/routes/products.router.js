@@ -50,7 +50,7 @@ router.post("/", uploader.array("thumbnails", 10), async (req, res) => {
 
 		if (files) {
 			files.forEach((file) => {
-				const imageUrl = `http://localhost:8080/images/${file.filename}`;
+				const imageUrl = `http://localhost:3000/images/${file.filename}`;
 				product.thumbnails.push(imageUrl);
 			});
 		}

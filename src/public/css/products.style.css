@@ -42,6 +42,7 @@ body {
 .main-container {
 	display: flex;
 	justify-content: center;
+	width: 100%;
 }
 
 .products-main-container {
@@ -331,7 +332,7 @@ body {
 	margin: 0.5rem;
 	font-weight: 600;
 	height: 40px;
-	width: 75px !important;
+	width: 75px;
 	text-align: center;
 	border-radius: 12px;
 	box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
@@ -370,6 +371,34 @@ body {
 	user-select: none;
 	cursor: pointer;
 	transition: background-color ease 0.25s;
+}
+
+.btn-dark-blue {
+	background-color: var(--J-color);
+	color: #fff;
+	transition: background-color 0.3s ease;
+}
+
+.btn-dark-blue:hover {
+	filter: brightness(120%);
+}
+
+.btn-black {
+	background-color: #111;
+	color: #fff;
+	transition: background color 0.3s ease, color 0.3s ease;
+}
+
+.btn-black:hover {
+	background-color: #444;
+}
+
+.btn-black:active {
+	background-color: #000;
+}
+
+.large-btn {
+	width: 6rem;
 }
 
 .thumbnail {

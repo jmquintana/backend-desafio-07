@@ -26,6 +26,8 @@
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
+	margin: 1rem;
+	width: 25rem;
 }
 
 .product-card {
@@ -140,14 +142,4 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-}
-
-.btn-black {
-	background-color: var(--J-color);
-	color: #fff;
-	transition: background-color 0.3s ease;
-}
-
-.btn-black:hover {
-	filter: brightness(120%);
 }
